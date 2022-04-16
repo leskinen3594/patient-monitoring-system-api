@@ -1,7 +1,0 @@
-driver: "postgresql"
-host: "db-postgresql-sgp1-96003-do-user-11149456-0.b.db.ondigitalocean.com"
-port: "25060"
-username: "doadmin"
-password: "g9Oq9hrtO8gemrQS"
-database: "defaultdb"
-ssl_mode: "require"
