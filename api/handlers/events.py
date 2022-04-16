@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-import dependency
+from . import dependency
 
 
 async def startup(app: FastAPI):
