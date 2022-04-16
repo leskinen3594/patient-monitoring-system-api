@@ -1,10 +1,13 @@
 import sqlalchemy as _sql
 import sqlalchemy.orm as _orm
 
-from database import PostgresqlConfig, CreatePostgresDb
+from database import PostgresqlConfig, CreatePostgresDb, SQLALCHEMY_DATABASE_URI
 
 
-_database = CreatePostgresDb(config=PostgresqlConfig)
+if SQLALCHEMY_DATABASE_URI is not None:
+    _database = CreatePostgresDb(database_env=SQLALCHEMY_DATABASE_URI)
+else:
+    _database = CreatePostgresDb(config=PostgresqlConfig)
 
 
 class Role(_database.Base):
