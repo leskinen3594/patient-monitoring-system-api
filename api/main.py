@@ -8,7 +8,10 @@ from .controllers import (
 )
 
 
-origins = ['*']
+origins = [
+    "http://localhost",
+    "http://localhost:5000",
+]
 
 
 def create_app():
@@ -32,3 +35,4 @@ app.add_middleware(
 
 # Run with cli
 # uvicorn api.main:app --reload --host 0.0.0.0 --port 5000
+# web: uvicorn api.main:app --host=0.0.0.0 --port=${PORT:-5000}
