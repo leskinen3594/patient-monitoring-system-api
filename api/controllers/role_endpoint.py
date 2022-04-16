@@ -31,7 +31,7 @@ async def create(role: CreateUpdateRole):
     return CreateUpdateRoleSuccess(role_id=role_id, message=response_msg)
 
 
-@router.get("/", response_model=List[Role])
+@router.get("", response_model=List[Role])
 async def get_all():
     try:
         role = await get_all_role_service()
