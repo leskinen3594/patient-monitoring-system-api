@@ -30,7 +30,7 @@ class RoleRepository(RoleRepositoryAbstract):
             self.db.add(self.role)
             self.db.commit()
         except Exception as e:
-            raise DuplicateKeyException(f"'role_nameth' or 'role_nameen' already exist. detail: {e}")
+            raise DuplicateKeyException(f"'role_nameth' or 'role_nameen' already exist. debug: {e}")
         return "role created"
 
 
@@ -38,7 +38,7 @@ class RoleRepository(RoleRepositoryAbstract):
         try:
             self.roles = self.db.query(_models.Role).all()
         except Exception as e:
-            raise NotFoundException(f"role empty. detail: {e}")
+            raise NotFoundException(f"role empty. debug: {e}")
         return self.roles
 
 
@@ -49,7 +49,7 @@ class RoleRepository(RoleRepositoryAbstract):
             if self.role is None:
                 raise
         except Exception as e:
-            raise NotFoundException(f"role_id: '{id}' not found. detail: {e}")
+            raise NotFoundException(f"role_id: '{id}' not found. debug: {e}")
         return self.role
 
 
@@ -62,7 +62,7 @@ class RoleRepository(RoleRepositoryAbstract):
 
             self.db.commit()
         except Exception as e:
-            raise UnknowException(f"cannot update role_id: '{role.role_id}'. detail: {e}")
+            raise UnknowException(f"cannot update role_id: '{role.role_id}'. debug: {e}")
         return "role updated"
 
 
@@ -71,5 +71,5 @@ class RoleRepository(RoleRepositoryAbstract):
             self.db.delete(role)
             self.db.commit()
         except Exception as e:
-            raise UnknowException(f"cannot delete role_id: '{role.role_id}'. detail: {e}")
+            raise UnknowException(f"cannot delete role_id: '{role.role_id}'. debug: {e}")
         return "role deleted"

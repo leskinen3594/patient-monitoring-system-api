@@ -8,16 +8,7 @@ from .controllers import (
 )
 
 
-origins = [
-    "http://localhost",
-    "http://localhost:5000",
-    "https://localhost",
-    "https://localhost:5000",
-    "http://0.0.0.0",
-    "http://0.0.0.0:5000",
-    "https://0.0.0.0",
-    "https://0.0.0.0:5000",
-]
+origins = ["*"]
 
 
 def create_app():
