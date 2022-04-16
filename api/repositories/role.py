@@ -29,16 +29,16 @@ class RoleRepository(RoleRepositoryAbstract):
             self.role = _models.Role(**role)
             self.db.add(self.role)
             self.db.commit()
-        except:
-            raise DuplicateKeyException("'role_nameth' or 'role_nameen' already exist")
+        except Exception as e:
+            raise DuplicateKeyException(f"'role_nameth' or 'role_nameen' already exist. detail: {e}")
         return "role created"
 
 
     async def select_all(self) -> Role:
         try:
             self.roles = self.db.query(_models.Role).all()
-        except:
-            raise NotFoundException("role empty")
+        except Exception as e:
+            raise NotFoundException(f"role empty. detail: {e}")
         return self.roles
 
 
@@ -48,8 +48,8 @@ class RoleRepository(RoleRepositoryAbstract):
 
             if self.role is None:
                 raise
-        except:
-            raise NotFoundException(f"role_id: '{id}' not found")
+        except Exception as e:
+            raise NotFoundException(f"role_id: '{id}' not found. detail: {e}")
         return self.role
 
 
@@ -61,8 +61,8 @@ class RoleRepository(RoleRepositoryAbstract):
             role.updated_at = role_update['updated_at']
 
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot update role_id: '{role.role_id}'")
+        except Exception as e:
+            raise UnknowException(f"cannot update role_id: '{role.role_id}'. detail: {e}")
         return "role updated"
 
 
@@ -70,6 +70,6 @@ class RoleRepository(RoleRepositoryAbstract):
         try:
             self.db.delete(role)
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot delete role_id: '{role.role_id}'")
+        except Exception as e:
+            raise UnknowException(f"cannot delete role_id: '{role.role_id}'. detail: {e}")
         return "role deleted"
