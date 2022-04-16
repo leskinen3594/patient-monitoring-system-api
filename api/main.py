@@ -10,7 +10,7 @@ from .controllers import (
 
 origins = [
     "https://api-pms-dev.herokuapp.com",
-    "db-postgresql-sgp1-96003-do-user-11149456-0.b.db.ondigitalocean.com"
+    "ec2-52-203-118-49.compute-1.amazonaws.com",
 ]
 
 
