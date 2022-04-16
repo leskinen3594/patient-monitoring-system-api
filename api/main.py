@@ -8,10 +8,7 @@ from .controllers import (
 )
 
 
-origins = [
-    "https://api-pms-dev.herokuapp.com",
-    "ec2-52-203-118-49.compute-1.amazonaws.com",
-]
+origins = ["https://api-pms-dev.herokuapp.com"]
 
 
 def create_app():
