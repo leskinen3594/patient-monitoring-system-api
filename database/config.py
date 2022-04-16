@@ -1,10 +1,9 @@
 from pydantic import BaseSettings
 import yaml
-import os
+# import os
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# DATABASE_URL = os.environ.get('DATABASE_URL')
 
-print(f"\n [Database] : {DATABASE_URL} \n")
 
 class _ReadConfigFile:
     def __read_config_file(self) -> dict:
