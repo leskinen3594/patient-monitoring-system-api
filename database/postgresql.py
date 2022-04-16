@@ -2,11 +2,9 @@ import sqlalchemy as _sql
 import sqlalchemy.ext.declarative as _declarative
 import sqlalchemy.orm as _orm
 
-from .config import PostgresqlConfig
-
 
 class CreatePostgresDb:
-    def __init__(self, config: PostgresqlConfig=None, database_env: str=None):
+    def __init__(self, config=None, database_env: str=None):
         if config is not None:
             self.config = config()
             self.DATABASE_URL = f"{self.config.DRIVER}://{self.config.USER}:{self.config.PASSWORD}@{self.config.HOST}:{self.config.PORT}/{self.config.DATABASE}"

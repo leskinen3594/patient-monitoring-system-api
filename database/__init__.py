@@ -1,2 +1,2 @@
-from .config import PostgresqlConfig
-from .postgresql import CreatePostgresDb, SQLALCHEMY_DATABASE_URI
+from .config import PostgresqlConfig, SQLALCHEMY_DATABASE_URI
+from .postgresql import CreatePostgresDb
