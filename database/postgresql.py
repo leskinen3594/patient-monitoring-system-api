@@ -1,6 +1,7 @@
 import sqlalchemy as _sql
 import sqlalchemy.ext.declarative as _declarative
 import sqlalchemy.orm as _orm
+import os
 
 from .config import PostgresqlConfig
 
@@ -8,10 +9,11 @@ from .config import PostgresqlConfig
 class CreatePostgresDb:
     def __init__(self, config: PostgresqlConfig):
         self.config = config()
-        self.DATABASE_URL = f"{self.config.DRIVER}://{self.config.USER}:{self.config.PASSWORD}@{self.config.HOST}:{self.config.PORT}/{self.config.DATABASE}"
+        # self.DATABASE_URL = f"{self.config.DRIVER}://{self.config.USER}:{self.config.PASSWORD}@{self.config.HOST}:{self.config.PORT}/{self.config.DATABASE}"
+        self.DATABASE_URL = os.environ.get('DATABASE_URL')
 
-        if self.config.SSL_MODE:
-            self.DATABASE_URL += f"?sslmode={self.config.SSL_MODE}"
+        # if self.config.SSL_MODE:
+        #     self.DATABASE_URL += f"?sslmode={self.config.SSL_MODE}"
 
         self.engine = _sql.create_engine(self.DATABASE_URL)
 
