@@ -31,7 +31,7 @@ async def create(role: CreateUpdateRole):
     return CreateUpdateRoleSuccess(role_id=role_id, message=response_msg)
 
 
-@router.get("", response_model=List[Role])
+@router.get("", response_model=List[Role], response_model_exclude_none=True)
 async def get_all():
     try:
         role = await get_all_role_service()
@@ -42,7 +42,7 @@ async def get_all():
     return list(map(Role.from_orm, role))
 
 
-@router.get("/{role_id}", response_model=Role)
+@router.get("/{role_id}", response_model=Role, response_model_exclude_none=True)
 async def get_by_id(role_id: str):
     try:
         role = await get_one_role_service(role_id)
