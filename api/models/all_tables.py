@@ -4,7 +4,7 @@ import sqlalchemy.orm as _orm
 from database import PostgresqlConfig, CreatePostgresDb
 
 
-_database = CreatePostgresDb(PostgresqlConfig)
+_database = CreatePostgresDb(config=PostgresqlConfig)
 
 
 class Role(_database.Base):
