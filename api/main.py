@@ -1,20 +1,37 @@
 from fastapi import FastAPI
-from typing import Optional
+from fastapi.middleware.cors import CORSMiddleware
+from functools import partial
 
-app = FastAPI()
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+from .handlers.events import startup, shutdown
+from .controllers import (
+    test_endpoint, role_endpoint,
+)
 
 
-# if __name__ == '__main__':
-#     uvicorn.run("main:app", host = "0.0.0.0", port = 8000, reload = True)
+origins = [
+    "http://localhost",
+    "http://localhost:5000",
+]
+
+
+def create_app():
+    fast_app = FastAPI(title='Patient Monitoring System', description="API ระบบติดตามผลการตรวจของแพทย์ (Demo)")
+    fast_app.add_event_handler('startup', func=partial(startup, app=fast_app))
+    fast_app.add_event_handler('shutdown', func=partial(shutdown, app=fast_app))
+    fast_app.include_router(test_endpoint.router, prefix='/v1/ping', tags=['Ping'])
+    fast_app.include_router(role_endpoint.router, prefix='/v1/roles', tags=['Role'])
+    return fast_app
+
+app = create_app()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Run with cli
-# uvicorn main:app --reload --host 0.0.0.0 --port 5000
+# uvicorn api.main:app --reload --host 0.0.0.0 --port 5000

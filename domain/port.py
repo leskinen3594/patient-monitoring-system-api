@@ -1,0 +1,1 @@
+from domain.repositories.role import RoleRepositoryAbstract
