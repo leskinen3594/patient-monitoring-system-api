@@ -3,7 +3,7 @@ import yaml
 import os
 
 # DATABASE_URL = os.environ.get('DATABASE_URL')
-SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_PMS_URL')
 
 
 class _ReadConfigFile:
