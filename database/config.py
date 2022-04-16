@@ -5,7 +5,7 @@ import yaml
 class _ReadConfigFile:
     def __read_config_file(self) -> dict:
         # Input file or path/file
-        file_name = 'configs/db.prod.yaml'
+        file_name = 'configs/db.dev.yaml'
 
         with open(file_name) as file:
             self.content = yaml.safe_load(file)
