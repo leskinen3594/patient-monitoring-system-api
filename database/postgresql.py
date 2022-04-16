@@ -13,15 +13,7 @@ class CreatePostgresDb:
         if self.config.SSL_MODE:
             self.DATABASE_URL += f"?sslmode={self.config.SSL_MODE}"
 
-        self.engine = _sql.create_engine(
-                                            self.DATABASE_URL,
-                                            pool_pre_ping=True,
-                                            connect_args={
-                                                "keepalives": 1,
-                                                "keepalives_idle": 30,
-                                                "keepalives_interval": 10,
-                                                "keepalives_count": 5,
-                                            })
+        self.engine = _sql.create_engine(self.DATABASE_URL)
 
         self.SessionLocal = _orm.sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
 

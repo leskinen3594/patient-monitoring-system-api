@@ -4,7 +4,7 @@ port: "5432"
 username: "uqptadmwuhzpxu"
 password: "a58ee76bb1f11ea598b92a82dd65217c7c7ced4798e68a13da3e87340bd0c3d5"
 database: "d8vrt3ie476oao"
-ssl_mode: ""
+ssl_mode: "require"
 
 # driver: "postgresql"
 # host: "localhost"
