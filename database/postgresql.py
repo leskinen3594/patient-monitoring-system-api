@@ -4,7 +4,7 @@ import sqlalchemy.orm as _orm
 
 
 class CreatePostgresDb:
-    def __init__(self, config=None, database_env: str=None):
+    def __init__(self, config=None, database_env=None):
         if config is not None:
             self.config = config()
             self.DATABASE_URL = f"{self.config.DRIVER}://{self.config.USER}:{self.config.PASSWORD}@{self.config.HOST}:{self.config.PORT}/{self.config.DATABASE}"
