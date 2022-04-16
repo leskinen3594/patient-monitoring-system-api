@@ -1,8 +1,9 @@
 from pydantic import BaseSettings
 import yaml
-# import os
+import os
 
 # DATABASE_URL = os.environ.get('DATABASE_URL')
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 
 class _ReadConfigFile:

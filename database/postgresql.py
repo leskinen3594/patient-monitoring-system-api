@@ -2,18 +2,18 @@ import sqlalchemy as _sql
 import sqlalchemy.ext.declarative as _declarative
 import sqlalchemy.orm as _orm
 
-from .config import PostgresqlConfig
+from .config import PostgresqlConfig, SQLALCHEMY_DATABASE_URI
 
 
 class CreatePostgresDb:
     def __init__(self, config: PostgresqlConfig):
-        self.config = config()
-        self.DATABASE_URL = f"{self.config.DRIVER}://{self.config.USER}:{self.config.PASSWORD}@{self.config.HOST}:{self.config.PORT}/{self.config.DATABASE}"
+        # self.config = config()
+        # self.DATABASE_URL = f"{self.config.DRIVER}://{self.config.USER}:{self.config.PASSWORD}@{self.config.HOST}:{self.config.PORT}/{self.config.DATABASE}"
 
-        if self.config.SSL_MODE:
-            self.DATABASE_URL += f"?sslmode={self.config.SSL_MODE}"
+        # if self.config.SSL_MODE:
+        #     self.DATABASE_URL += f"?sslmode={self.config.SSL_MODE}"
 
-        self.engine = _sql.create_engine(self.DATABASE_URL)
+        self.engine = _sql.create_engine(SQLALCHEMY_DATABASE_URI)
 
         self.SessionLocal = _orm.sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
 
