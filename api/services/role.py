@@ -1,6 +1,5 @@
 from typing import List, Tuple
 
-from ..handlers.errors import NotFoundException
 from ..handlers.utilities import datetime_set_timezone
 
 from domain.usecase import (
@@ -14,10 +13,6 @@ from domain.usecase import (
 
 async def create_role_service(role_request: List[str]) -> Tuple[str]:
     return await __usecase_create(role_request, datetime_set_timezone(7))
-
-
-async def update_role_service():
-    pass
 
 
 async def get_all_role_service():

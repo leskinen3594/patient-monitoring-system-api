@@ -7,7 +7,10 @@ from ..handlers.errors import (
 
 from domain.port import RoleRepositoryAbstract
 from ..models import all_tables as _models
-from ..schemas.role import Role
+from ..schemas.role import (
+    CreateUpdateRole, Role
+)
+
 
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
@@ -24,7 +27,7 @@ class RoleRepository(RoleRepositoryAbstract):
         return str(uuid.uuid4())
 
 
-    async def insert(self, role) -> str:
+    async def insert(self, role: CreateUpdateRole) -> str:
         try:
             self.role = _models.Role(**role)
             self.db.add(self.role)
@@ -37,8 +40,8 @@ class RoleRepository(RoleRepositoryAbstract):
     async def select_all(self) -> Role:
         try:
             self.roles = self.db.query(_models.Role).all()
-        except Exception as e:
-            raise NotFoundException(f"role empty. debug: {e}")
+        except:
+            raise NotFoundException(f"role empty.")
         return self.roles
 
 
@@ -53,7 +56,7 @@ class RoleRepository(RoleRepositoryAbstract):
         return self.role
 
 
-    async def update(self, role: Role, role_update: Role) -> str:
+    async def update(self, role: Role, role_update: CreateUpdateRole) -> str:
         try:
             # print(f"\n [DEBUG 1] : {role_update} \n")
             role.role_nameth = role_update['role_nameth']
@@ -66,7 +69,7 @@ class RoleRepository(RoleRepositoryAbstract):
         return "role updated"
 
 
-    async def delete(self, role: Role):
+    async def delete(self, role: Role) -> str:
         try:
             self.db.delete(role)
             self.db.commit()

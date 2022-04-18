@@ -36,7 +36,7 @@ async def get_all():
     try:
         role = await get_all_role_service()
     except NotFoundException as error_not_found:
-        raise HTTPException(status_code=404, detail=f"{error_not_found}")
+        raise HTTPException(status_code=204, detail=f"{error_not_found}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"{e}")
     return list(map(Role.from_orm, role))

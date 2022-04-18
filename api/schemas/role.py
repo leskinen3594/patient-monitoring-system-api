@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 
 class CreateUpdateRole(BaseModel):
-    role_nameth: str
+    role_nameth: str | None
     role_nameen: str
 
 

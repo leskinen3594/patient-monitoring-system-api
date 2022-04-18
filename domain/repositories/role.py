@@ -31,5 +31,5 @@ class RoleRepositoryAbstract(RepositoryAbstract[str, Role]):
 
 
     @abstractmethod
-    async def delete(self, id: str):
+    async def delete(self, entity: Role):
         pass
