@@ -25,9 +25,9 @@ class Role(_database.Base):
 class PrefixName(_database.Base):
     __tablename__ = "prefix_name"
     prefix_id = _sql.Column(_sql.VARCHAR(length=36), primary_key=True, index=True)
-    prefix_nameth = _sql.Column(_sql.String, index=True, unique=True, nullable=True)
+    prefix_nameth = _sql.Column(_sql.String, index=True, unique=True, nullable=False)
     prefix_nameen = _sql.Column(_sql.String, index=True, unique=True, nullable=True)
-    prefix_ab_nameth = _sql.Column(_sql.String, index=True, unique=True, nullable=True)
+    prefix_ab_nameth = _sql.Column(_sql.String, index=True, unique=True, nullable=False)
     prefix_ab_nameen = _sql.Column(_sql.String, index=True, unique=True, nullable=True)
     created_at = _sql.Column(_sql.TIMESTAMP(timezone=True), nullable=True)
     updated_at = _sql.Column(_sql.TIMESTAMP(timezone=True), nullable=True)

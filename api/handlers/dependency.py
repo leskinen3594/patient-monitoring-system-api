@@ -1,5 +1,5 @@
 from domain.registry import Registry
-from ..repositories.role import RoleRepository
+from ..repositories import RoleRepository, PrefixRepository
 from database import PostgresqlConfig, CreatePostgresDb, SQLALCHEMY_DATABASE_URI
 
 def inject():
@@ -8,3 +8,4 @@ def inject():
     else:
         postgres_db = CreatePostgresDb(config=PostgresqlConfig)
     Registry().role_repository = RoleRepository(next(postgres_db.get_db()))
+    Registry().prefix_name_repository = PrefixRepository(next(postgres_db.get_db()))

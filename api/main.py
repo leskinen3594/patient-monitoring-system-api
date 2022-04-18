@@ -4,7 +4,7 @@ from functools import partial
 
 from .handlers.events import startup, shutdown
 from .controllers import (
-    test_endpoint, role_endpoint,
+    test_endpoint, role_endpoint, prefix_endpoint
 )
 
 
@@ -17,6 +17,7 @@ def create_app():
     fast_app.add_event_handler('shutdown', func=partial(shutdown, app=fast_app))
     fast_app.include_router(test_endpoint.router, prefix='/v1/ping', tags=['Ping'])
     fast_app.include_router(role_endpoint.router, prefix='/v1/roles', tags=['Role'])
+    fast_app.include_router(prefix_endpoint.router, prefix='/v1/prefixs', tags=['Prefix Name'])
     return fast_app
 
 app = create_app()

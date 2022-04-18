@@ -1,4 +1,4 @@
-## Repository
+## Repository (Adapter)
 
 # ติดต่อกับฐานข้อมูล
 - นำข้อมูลเข้า
