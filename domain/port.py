@@ -1,2 +1,3 @@
 from domain.repositories.role import RoleRepositoryAbstract
 from domain.repositories.prefix_name import PrefixNameRepositoryAbstract
+from domain.repositories.user import UserRepositoryAbstract
