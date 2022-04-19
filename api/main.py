@@ -5,7 +5,7 @@ from functools import partial
 from .handlers.events import startup, shutdown
 from .controllers import (
     test_endpoint, role_endpoint, prefix_endpoint,
-    user_endpoint
+    user_endpoint, doctor_endpoint, patient_endpoint
 )
 
 
@@ -20,6 +20,8 @@ def create_app():
     fast_app.include_router(role_endpoint.router, prefix='/v1/roles', tags=['Role'])
     fast_app.include_router(prefix_endpoint.router, prefix='/v1/prefixs', tags=['Prefix Name'])
     fast_app.include_router(user_endpoint.router, prefix='/v1/users', tags=['User'])
+    fast_app.include_router(doctor_endpoint.router, prefix='/v1/doctors', tags=['Doctor'])
+    fast_app.include_router(patient_endpoint.router, prefix='/v1/patients', tags=['Patient'])
     return fast_app
 
 app = create_app()

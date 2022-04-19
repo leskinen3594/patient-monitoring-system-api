@@ -3,11 +3,11 @@ from typing import List
 
 from ..services.user import (
     create_user_service, get_all_user_service,get_one_user_service,
-    update_user_service, delete_user_service
+    update_user_service, delete_user_service, login_service
 ) 
 
 from ..schemas.user import (
-    CreateUpdate, CreateUpdateSuccess, User, DeleteSuccess
+    CreateUpdate, CreateUpdateSuccess, DoctorLogin, LoginSuccess, PatientLogin, User, DeleteSuccess, Login
 )
 
 from ..handlers.errors import (
@@ -77,3 +77,18 @@ async def delete(role_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"{e}")
     return DeleteSuccess(message=response_msg)
+
+
+# @router.post("/login", response_model=LoginSuccess | DoctorLogin | PatientLogin, response_model_exclude_none=True)
+@router.post("/login")
+async def login(login: Login):
+    try:
+        req_list = [t for t in login]
+        user = await login_service(login_request=req_list)
+    except NotFoundException as error_not_found:
+        raise HTTPException(status_code=404, detail=f"{error_not_found}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"{e}")
+    return user
+    # if patient is None:
+    #     return DoctorLogin(user_info=user, doctor_info=doctor)

@@ -1,3 +1,3 @@
 from .role import Role
 from .prefix_name import PrefixName
-from .user import User
+from .user import User, Doctor, Patient, Login

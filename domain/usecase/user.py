@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List, Tuple
 
-from domain.entities import User
+from domain.entities import User, Login
 from domain.registry import Registry
 
 
@@ -36,3 +36,22 @@ async def delete_user(user: User):
     repo = Registry().user_repository
     message = await repo.delete(user)
     return message
+
+
+async def login_user(loginRequest: User):
+    repo = Registry().user_repository
+    login = Login.login_with_email(loginList=loginRequest)
+    user_info = await repo.login(login)
+    return user_info
+
+
+async def login_doctor_detail(userId: str):
+    repo = Registry().user_repository
+    doctor_detail = await repo.doctor_detail(userId)
+    return doctor_detail
+
+
+async def login_patient_detail(userId: str):
+    repo = Registry().user_repository
+    patient_detail = await repo.patient_detail(userId)
+    return patient_detail

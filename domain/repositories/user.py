@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
 from domain.base.repository import RepositoryAbstract
-from domain.entities import User
+from domain.entities import User, Login
 
 
 class UserRepositoryAbstract(RepositoryAbstract[str, User]):
@@ -32,4 +32,19 @@ class UserRepositoryAbstract(RepositoryAbstract[str, User]):
 
     @abstractmethod
     async def delete(self, entity: User):
+        pass
+
+
+    @abstractmethod
+    async def login(self, loginRequest: Login):
+        pass
+
+
+    @abstractmethod
+    async def doctor_detail(self, userId: str):
+        pass
+
+
+    @abstractmethod
+    async def patient_detail(self, userId: str):
         pass
