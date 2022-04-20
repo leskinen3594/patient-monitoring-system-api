@@ -6,7 +6,7 @@ from .handlers.events import startup, shutdown
 from .controllers import (
     test_endpoint, role_endpoint, prefix_endpoint,
     user_endpoint, doctor_endpoint, patient_endpoint,
-    log_endpoint
+    log_endpoint, ptl_endpoint
 )
 
 
@@ -23,6 +23,7 @@ def create_app():
     fast_app.include_router(user_endpoint.router, prefix='/v1/users', tags=['User'])
     fast_app.include_router(doctor_endpoint.router, prefix='/v1/doctors', tags=['Doctor'])
     fast_app.include_router(patient_endpoint.router, prefix='/v1/patients', tags=['Patient'])
+    fast_app.include_router(ptl_endpoint.router, prefix='/v1/patients-list', tags=['Patient List'])
     fast_app.include_router(log_endpoint.router, prefix='/v1/estimate-log', tags=['Estimate Log'])
     return fast_app
 
