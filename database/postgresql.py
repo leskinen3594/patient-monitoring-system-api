@@ -4,18 +4,8 @@ import sqlalchemy.orm as _orm
 
 
 class CreatePostgresDb:
-    def __init__(self, config=None, database_env=None):
-        if config is not None:
-            self.config = config()
-            self.DATABASE_URL = f"{self.config.DRIVER}://{self.config.USER}:{self.config.PASSWORD}@{self.config.HOST}:{self.config.PORT}/{self.config.DATABASE}"
-
-            if self.config.SSL_MODE:
-                self.DATABASE_URL += f"?sslmode={self.config.SSL_MODE}"
-
-        if database_env is not None:
-            self.engine = _sql.create_engine(database_env)
-        else:
-            self.engine = _sql.create_engine(self.DATABASE_URL)
+    def __init__(self, database_env):
+        self.engine = _sql.create_engine(database_env)
 
         self.SessionLocal = _orm.sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
 
@@ -32,8 +22,3 @@ class CreatePostgresDb:
             yield self.db
         finally:
             self.db.close()
-
-
-    # def close_db(self):
-    #     self.db = self.SessionLocal()
-    #     return self.db.close()
