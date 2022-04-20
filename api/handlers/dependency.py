@@ -2,7 +2,7 @@ from domain.registry import Registry
 
 from ..repositories import (
     RoleRepository, PrefixRepository, UserRepository, DoctorRepository,
-    PatientRepository, LogRepository
+    PatientRepository, LogRepository, PatientListRepository
 )
 
 from database import CreatePostgresDb, SQLALCHEMY_DATABASE_URI
@@ -17,3 +17,4 @@ def inject():
     Registry().doctor_repository = DoctorRepository(next(postgres_db.get_db()))
     Registry().patient_repository = PatientRepository(next(postgres_db.get_db()))
     Registry().log_repository = LogRepository(next(postgres_db.get_db()))
+    Registry().ptl_repository = PatientListRepository(next(postgres_db.get_db()))
