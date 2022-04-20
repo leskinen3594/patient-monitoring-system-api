@@ -43,14 +43,14 @@ class DoctorRepository(DoctorRepositoryAbstract):
         return self.doctors
 
 
-    async def select_by_id(self, code: str) -> Doctor:
+    async def select_by_id(self, id: str) -> Doctor:
         try:
-            self.doctor = self.db.query(_models.Doctor).filter(_models.Doctor.doctor_code == code).first()
+            self.doctor = self.db.query(_models.Doctor).filter(_models.Doctor.doctor_id == id).first()
 
             if self.doctor is None:
                 raise
         except:
-            raise NotFoundException(f"doctor_code: '{code}' not found.")
+            raise NotFoundException(f"doctor_id: '{id}' not found.")
         return self.doctor
 
 

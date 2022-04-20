@@ -18,10 +18,10 @@ async def get_all_doctor_service():
     return await __usecase_get_all()
 
 
-async def get_one_doctor_service(doctor_code: str):
-    return await __usecase_get_one(doctor_code)
+async def get_one_doctor_service(doctor_id: str):
+    return await __usecase_get_one(doctor_id)
 
 
-async def update_doctor_service(doctor_code: str, doctor_request: List[str]) -> str:
-    doctor = await __usecase_get_one(doctor_code)
+async def update_doctor_service(doctor_id: str, doctor_request: List[str]) -> str:
+    doctor = await __usecase_get_one(doctor_id)
     return await __usecase_update(doctor, doctor_request, datetime_set_timezone(7))
