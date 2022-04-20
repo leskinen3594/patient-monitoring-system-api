@@ -41,10 +41,10 @@ async def get_all():
     return list(map(Patient.from_orm, patients))
 
 
-@router.get("/{patient_code}", response_model=Patient, response_model_exclude_none=True)
-async def get_by_code(patient_code: str):
+@router.get("/{patient_id}", response_model=Patient, response_model_exclude_none=True)
+async def get_by_id(patient_id: str):
     try:
-        patient = await get_one_patient_service(patient_code)
+        patient = await get_one_patient_service(patient_id)
     except NotFoundException as error_not_found:
         raise HTTPException(status_code=404, detail=f"{error_not_found}")
     except Exception as e:
@@ -52,15 +52,15 @@ async def get_by_code(patient_code: str):
     return patient
 
 
-@router.put("/{patient_code}", response_model=CreateUpdateSuccess)
-async def update(patient_code: str, patient: CreateUpdate):
+@router.put("/{patient_id}", response_model=CreateUpdateSuccess)
+async def update(patient_id: str, patient: CreateUpdate):
     try:
         req_list = [t for t in patient]
-        patient_id, response_msg = await update_patient_service(patient_code=patient_code, patient_request=req_list)
+        pt_id, response_msg = await update_patient_service(patient_id=patient_id, patient_request=req_list)
     except NotFoundException as error_not_found:
         raise HTTPException(status_code=404, detail=f"{error_not_found}")
     except RequireKeyException as error_require_key:
         raise HTTPException(status_code=400, detail=f"{error_require_key}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"{e}")
-    return CreateUpdateSuccess(pt_id=patient_id, pt_code=patient.pt_code, message=response_msg)
+    return CreateUpdateSuccess(pt_id=pt_id, pt_code=patient.pt_code, message=response_msg)

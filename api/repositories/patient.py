@@ -43,14 +43,14 @@ class PatientRepository(PatientRepositoryAbstract):
         return self.patients
 
 
-    async def select_by_id(self, code: str) -> Patient:
+    async def select_by_id(self, id: str) -> Patient:
         try:
-            self.patient = self.db.query(_models.Patient).filter(_models.Patient.pt_code == code).first()
+            self.patient = self.db.query(_models.Patient).filter(_models.Patient.pt_id == id).first()
 
             if self.patient is None:
                 raise
         except:
-            raise NotFoundException(f"patient_code: '{code}' not found.")
+            raise NotFoundException(f"patient_id: '{id}' not found.")
         return self.patient
 
 

@@ -19,9 +19,9 @@ async def get_all_patient() -> Patient:
     return patients
 
 
-async def get_one_patient(patientCode: str) -> Patient:
+async def get_one_patient(patientId: str) -> Patient:
     repo = Registry().patient_repository
-    patient = await repo.select_by_id(patientCode)
+    patient = await repo.select_by_id(patientId)
     return patient
 
 
