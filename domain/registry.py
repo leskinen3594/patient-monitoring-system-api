@@ -8,9 +8,11 @@ class Registry(metaclass=Singleton):
         from domain.repositories.user import UserRepositoryAbstract
         from domain.repositories.doctor import DoctorRepositoryAbstract
         from domain.repositories.patient import PatientRepositoryAbstract
+        from domain.repositories.estimate_log import LogRepositoryAbstract
 
         self.role_repository: RoleRepositoryAbstract | None
         self.prefix_name_repository: PrefixNameRepositoryAbstract | None
         self.user_repository: UserRepositoryAbstract | None
         self.doctor_repository: DoctorRepositoryAbstract | None
         self.patient_repository: PatientRepositoryAbstract | None
+        self.log_repository: LogRepositoryAbstract | None

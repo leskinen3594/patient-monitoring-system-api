@@ -88,6 +88,7 @@ class Patient(_database.Base):
 
     # One to Many
     apmts = _orm.relationship("Appointment", backref="patient", cascade="all, delete")
+    estimate_logs = _orm.relationship("Log", backref="patient", cascade="all, delete")
 
 
 class Appointment(_database.Base):

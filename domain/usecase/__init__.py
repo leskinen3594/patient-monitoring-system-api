@@ -22,3 +22,8 @@ from .patient import (
     create_new_patient, get_all_patient, get_one_patient,
     update_patient_info
 )
+
+from .estimate_log import (
+    create_new_log, get_all_log, get_one_log,
+    update_log_info, delete_log
+)

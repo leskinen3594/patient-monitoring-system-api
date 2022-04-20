@@ -3,3 +3,4 @@ from domain.repositories.prefix_name import PrefixNameRepositoryAbstract
 from domain.repositories.user import UserRepositoryAbstract
 from domain.repositories.doctor import DoctorRepositoryAbstract
 from domain.repositories.patient import PatientRepositoryAbstract
+from domain.repositories.estimate_log import LogRepositoryAbstract
