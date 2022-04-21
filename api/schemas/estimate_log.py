@@ -20,7 +20,7 @@ class EstimateLog(BaseModel):
     log_id: str | None
     doctor_id: str | None
     pt_id: str | None
-    log_level: str | None
+    log_level: int | None
     log_desc: str | None
     created_at: datetime | None
     updated_at: datetime | None
