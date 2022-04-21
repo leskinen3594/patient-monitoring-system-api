@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from functools import partial
-
 from .handlers.events import startup, shutdown
 from .controllers import (
     test_endpoint, role_endpoint, prefix_endpoint,
     user_endpoint, doctor_endpoint, patient_endpoint,
     log_endpoint, ptl_endpoint
 )
+from message_broker import connectMQTT, publish
 
 
 origins = ["https://api-pms-dev.herokuapp.com"]
@@ -27,8 +27,8 @@ def create_app():
     fast_app.include_router(log_endpoint.router, prefix='/v1/estimate-log', tags=['Estimate Log'])
     return fast_app
 
+connectMQTT()
 app = create_app()
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
