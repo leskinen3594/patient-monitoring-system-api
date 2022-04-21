@@ -5,3 +5,4 @@ from domain.repositories.doctor import DoctorRepositoryAbstract
 from domain.repositories.patient import PatientRepositoryAbstract
 from domain.repositories.estimate_log import LogRepositoryAbstract
 from domain.repositories.patient_list import PatientListRepositoryAbstract
+from domain.repositories.appointment import AppointmentRepositoryAbstract

@@ -66,6 +66,7 @@ class Doctor(_database.Base):
 
     # One to Many
     patients_list = _orm.relationship("PatientList", backref="doctor", cascade="all, delete")
+    apmts = _orm.relationship("Appointment", backref="doctor", cascade="all, delete")
 
 
 class Patient(_database.Base):
@@ -98,6 +99,7 @@ class Appointment(_database.Base):
     __tablename__ = "appointment"
     apmt_id = _sql.Column(_sql.VARCHAR(36), primary_key=True, index=True)
     pt_id = _sql.Column(_sql.String, _sql.ForeignKey("patients.pt_id"))
+    doctor_id = _sql.Column(_sql.String, _sql.ForeignKey("doctors.doctor_id"))
     apmt_datettime = _sql.Column(_sql.TIMESTAMP(timezone=True), index=True, nullable=True)
     created_at = _sql.Column(_sql.TIMESTAMP(timezone=True), nullable=True)
     updated_at = _sql.Column(_sql.TIMESTAMP(timezone=True), nullable=True)
