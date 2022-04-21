@@ -32,3 +32,8 @@ from .patient_list import (
     create_new_ptl, get_all_ptl, get_one_ptl,
     update_ptl_info, delete_ptl
 )
+
+from .appointment import (
+    create_new_apmt, get_all_apmt, get_one_apmt,
+    update_apmt_info, delete_apmt
+)
