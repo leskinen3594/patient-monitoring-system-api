@@ -1,5 +1,6 @@
 import uuid
 from typing import TYPE_CHECKING
+from datetime import datetime
 
 from ..handlers.errors import (
     NotFoundException, UnknowException
@@ -37,8 +38,11 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
 
     async def select_all(self) -> Appointment:
         try:
-            self.all_apmt = self.db.query(_models.Appointment).order_by(_models.Appointment.apmt_datettime).all()
-            
+            self.all_apmt = self.db.query(_models.Appointment)\
+                                    .filter(datetime.now() < _models.Appointment.apmt_datettime)\
+                                    .order_by(_models.Appointment.apmt_datettime)\
+                                    .all()
+
             if self.all_apmt is None:
                 raise
         except:
