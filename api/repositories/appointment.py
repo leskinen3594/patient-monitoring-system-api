@@ -37,7 +37,7 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
 
     async def select_all(self) -> Appointment:
         try:
-            self.all_apmt = self.db.query(_models.Appointment).all()
+            self.all_apmt = self.db.query(_models.Appointment).order_by(_models.Appointment.apmt_datettime).all()
             
             if self.all_apmt is None:
                 raise
