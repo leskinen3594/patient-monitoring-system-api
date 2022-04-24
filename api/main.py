@@ -7,7 +7,6 @@ from .controllers import (
     user_endpoint, doctor_endpoint, patient_endpoint,
     log_endpoint, ptl_endpoint, apmt_endpoint
 )
-from message_broker import connectMQTT, publish
 
 
 origins = ["https://api-pms-dev.herokuapp.com"]
@@ -28,7 +27,6 @@ def create_app():
     fast_app.include_router(apmt_endpoint.router, prefix='/v1/appointments', tags=['Appointment'])
     return fast_app
 
-connectMQTT()
 app = create_app()
 app.add_middleware(
     CORSMiddleware,
