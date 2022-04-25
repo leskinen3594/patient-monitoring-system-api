@@ -1,6 +1,7 @@
 import uuid
 from typing import TYPE_CHECKING
 from datetime import datetime
+from sqlalchemy import and_
 
 from ..handlers.errors import (
     NotFoundException, UnknowException
@@ -52,7 +53,11 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
 
     async def select_by_id(self, id: str) -> Appointment:
         try:
-            self.apmt = self.db.query(_models.Appointment).filter(_models.Appointment.pt_id == id).all()
+            self.apmt = self.db.query(_models.Appointment)\
+                                .filter(
+                                    and_(_models.Appointment.pt_id == id,
+                                    datetime.now() < _models.Appointment.apmt_datettime))\
+                                .all()
 
             if self.apmt is None:
                 raise
