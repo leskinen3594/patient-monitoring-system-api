@@ -17,8 +17,8 @@ async def get_all_ptl_service():
     return await __usecase_get_all()
 
 
-async def get_one_ptl_service(ptl_id: str):
-    return await __usecase_get_one(ptl_id)
+async def get_one_ptl_service(doctor_id: str):
+    return await __usecase_get_one(doctor_id)
 
 
 async def update_ptl_service(ptl_id: str, ptl_request: List[str]) -> str:

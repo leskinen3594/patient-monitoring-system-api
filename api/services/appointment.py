@@ -19,8 +19,8 @@ async def get_all_apmt_service():
     return await __usecase_get_all()
 
 
-async def get_one_apmt_service(apmt_id: str):
-    return await __usecase_get_one(apmt_id)
+async def get_one_apmt_service(pt_id: str):
+    return await __usecase_get_one(pt_id)
 
 
 async def update_apmt_service(apmt_id: str, apmt_request: List[str]) -> str:

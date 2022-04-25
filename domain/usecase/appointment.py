@@ -19,9 +19,9 @@ async def get_all_apmt() -> Appointment:
     return all_apmt
 
 
-async def get_one_apmt(apmtId: str) -> Appointment:
+async def get_one_apmt(ptId: str) -> Appointment:
     repo = Registry().apmt_repository
-    apmt = await repo.select_by_id(apmtId)
+    apmt = await repo.select_by_id(ptId)
     return apmt
 
 

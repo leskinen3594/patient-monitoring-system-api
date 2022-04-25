@@ -42,10 +42,10 @@ async def get_all():
     return list(map(Appointment.from_orm, all_apmt))
 
 
-@router.get("/{apmt_id}", response_model=Appointment, response_model_exclude_none=True)
-async def get_by_id(apmt_id: str):
+@router.get("/{pt_id}", response_model=Appointment, response_model_exclude_none=True)
+async def get_by_id(pt_id: str):
     try:
-        apmt = await get_one_apmt_service(apmt_id)
+        apmt = await get_one_apmt_service(pt_id)
     except NotFoundException as error_not_found:
         raise HTTPException(status_code=404, detail=f"{error_not_found}")
     except Exception as e:
