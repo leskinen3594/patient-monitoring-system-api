@@ -62,7 +62,7 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
             if self.apmt is None:
                 raise
         except:
-            raise NotFoundException(f"apmt_id: '{id}' not found.")
+            raise NotFoundException(f"pt_id: '{id}' not found.")
         return self.apmt
 
 

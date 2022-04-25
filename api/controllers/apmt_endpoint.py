@@ -42,7 +42,7 @@ async def get_all():
     return list(map(Appointment.from_orm, all_apmt))
 
 
-@router.get("/{pt_id}", response_model=List[Appointment], response_model_exclude_none=True)
+@router.get("/patients/{pt_id}", response_model=List[Appointment], response_model_exclude_none=True)
 async def get_by_id(pt_id: str):
     try:
         apmts = await get_one_apmt_service(pt_id)
