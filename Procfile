@@ -1,1 +1,1 @@
-web: uvicorn api.main:app --host=0.0.0.0 --port=${PORT:-5000} --limit-concurrency=100 --timeout-keep-alive=10 --log-level=debug
+web: uvicorn api.main:app --host=0.0.0.0 --port=${PORT:-5000}

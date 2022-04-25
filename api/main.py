@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from functools import partial
+
 from .handlers.events import startup, shutdown
 from .controllers import (
     test_endpoint, role_endpoint, prefix_endpoint,
@@ -40,3 +41,4 @@ app.add_middleware(
 # Run with cli
 # uvicorn api.main:app --reload --host 0.0.0.0 --port 5000
 # web: uvicorn api.main:app --host=0.0.0.0 --port=${PORT:-5000}
+# web: uvicorn api.main:app --host=0.0.0.0 --port=${PORT:-5000} --limit-concurrency=3000 --timeout-keep-alive=30 --log-level=debug
