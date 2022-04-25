@@ -35,5 +35,5 @@ from .patient_list import (
 
 from .appointment import (
     create_new_apmt, get_all_apmt, get_one_apmt,
-    update_apmt_info, delete_apmt
+    update_apmt_info, delete_apmt, get_one_apmt_by_id
 )

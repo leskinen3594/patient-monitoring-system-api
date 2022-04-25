@@ -21,6 +21,11 @@ class AppointmentRepositoryAbstract(RepositoryAbstract[str, Appointment]):
 
 
     @abstractmethod
+    async def select_by_apmt_id(self, id: str) -> Appointment:
+        pass
+
+
+    @abstractmethod
     async def insert(self, entity: Appointment):
         pass
 

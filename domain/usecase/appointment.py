@@ -25,6 +25,12 @@ async def get_one_apmt(ptId: str) -> Appointment:
     return apmt
 
 
+async def get_one_apmt_by_id(apmtId: str) -> Appointment:
+    repo = Registry().apmt_repository
+    apmt = await repo.select_by_apmt_id(apmtId)
+    return apmt
+
+
 async def update_apmt_info(apmt: Appointment, apmtReq: List[str], updatedAt: datetime) -> str:
     repo = Registry().apmt_repository
     apmt_update = Appointment.update_apmt_with_id(apmtList=apmtReq, updateDate=updatedAt)
