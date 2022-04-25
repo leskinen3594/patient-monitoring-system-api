@@ -18,9 +18,9 @@ async def get_all_ptl() -> PatientList:
     return all_ptl
 
 
-async def get_one_ptl(ptlId: str) -> PatientList:
+async def get_one_ptl(doctorId: str) -> PatientList:
     repo = Registry().ptl_repository
-    patient_list = await repo.select_by_id(ptlId)
+    patient_list = await repo.select_by_id(doctorId)
     return patient_list
 
 

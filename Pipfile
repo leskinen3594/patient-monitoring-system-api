@@ -8,7 +8,6 @@ fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 sqlalchemy = "*"
 psycopg2-binary = "*"
-paho-mqtt = "*"
 
 [dev-packages]
 

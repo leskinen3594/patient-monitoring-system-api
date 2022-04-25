@@ -45,7 +45,7 @@ class PatientListRepository(PatientListRepositoryAbstract):
 
     async def select_by_id(self, id: str) -> PatientList:
         try:
-            self.ptl = self.db.query(_models.PatientList).filter(_models.PatientList.ptl_id == id).first()
+            self.ptl = self.db.query(_models.PatientList).filter(_models.PatientList.doctor_id == id).first()
 
             if self.ptl is None:
                 raise
