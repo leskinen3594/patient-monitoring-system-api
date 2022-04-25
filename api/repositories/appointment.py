@@ -52,7 +52,7 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
 
     async def select_by_id(self, id: str) -> Appointment:
         try:
-            self.apmt = self.db.query(_models.Appointment).filter(_models.Appointment.pt_id == id).first()
+            self.apmt = self.db.query(_models.Appointment).filter(_models.Appointment.pt_id == id).all()
 
             if self.apmt is None:
                 raise

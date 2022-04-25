@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 
 class CreateUpdate(BaseModel):
+    user_id: str
     doctor_code: str
 
 
