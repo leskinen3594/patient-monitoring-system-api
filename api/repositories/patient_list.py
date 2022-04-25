@@ -30,16 +30,16 @@ class PatientListRepository(PatientListRepositoryAbstract):
             self.ptl = _models.PatientList(**ptl)
             self.db.add(self.ptl)
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot create patient list.")
+        except Exception as e:
+            raise UnknowException(f"cannot create patient list. {e}")
         return "patient list created"
 
 
     async def select_all(self) -> PatientList:
         try:
             self.ptls = self.db.query(_models.PatientList).all()
-        except:
-            raise NotFoundException(f"patient list empty.")
+        except Exception as e:
+            raise NotFoundException(f"patient list empty. {e}")
         return self.ptls
 
 
@@ -49,8 +49,8 @@ class PatientListRepository(PatientListRepositoryAbstract):
 
             if self.ptl is None:
                 raise
-        except:
-            raise NotFoundException(f"ptl_id: '{id}' not found.")
+        except Exception as e:
+            raise NotFoundException(f"ptl_id: '{id}' not found. {e}")
         return self.ptl
 
 
@@ -60,8 +60,8 @@ class PatientListRepository(PatientListRepositoryAbstract):
             ptl.pt_id = ptl_update['pt_id']
 
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot update ptl_id: '{ptl.ptl_id}'.")
+        except Exception as e:
+            raise UnknowException(f"cannot update ptl_id: '{ptl.ptl_id}'. {e}")
         return "patient list updated"
 
 
@@ -69,6 +69,6 @@ class PatientListRepository(PatientListRepositoryAbstract):
         try:
             self.db.delete(ptl)
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot delete ptl_id: '{ptl.ptl_id}'.")
+        except Exception as e:
+            raise UnknowException(f"cannot delete ptl_id: '{ptl.ptl_id}'. {e}")
         return "patient list deleted"

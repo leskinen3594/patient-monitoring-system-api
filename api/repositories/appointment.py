@@ -32,8 +32,8 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
             self.apmt = _models.Appointment(**apmt)
             self.db.add(self.apmt)
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot create an appointment.")
+        except Exception as e:
+            raise UnknowException(f"cannot create an appointment. {e}")
         return "appointment created"
 
 
@@ -46,8 +46,8 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
 
             if self.all_apmt is None:
                 raise
-        except:
-            raise NotFoundException(f"appointment empty.")
+        except Exception as e:
+            raise NotFoundException(f"appointment empty. {e}")
         return self.all_apmt
 
 
@@ -61,8 +61,8 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
 
             if self.apmt is None:
                 raise
-        except:
-            raise NotFoundException(f"pt_id: '{id}' not found.")
+        except Exception as e:
+            raise NotFoundException(f"pt_id: '{id}' not found. {e}")
         return self.apmt
 
 
@@ -76,8 +76,8 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
 
             if self.apmt is None:
                 raise
-        except:
-            raise NotFoundException(f"apmt_id: '{id}' not found.")
+        except Exception as e:
+            raise NotFoundException(f"apmt_id: '{id}' not found. {e}")
         return self.apmt
 
 
@@ -89,8 +89,8 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
             apmt.updated_at = apmt_update['updated_at']
 
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot update apmt_id: '{apmt.apmt_id}'.")
+        except Exception as e:
+            raise UnknowException(f"cannot update apmt_id: '{apmt.apmt_id}'. {e}")
         return "appointment updated"
 
 
@@ -98,6 +98,6 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
         try:
             self.db.delete(apmt)
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot delete apmt_id: '{apmt.apmt_id}'.")
+        except Exception as e:
+            raise UnknowException(f"cannot delete apmt_id: '{apmt.apmt_id}'. {e}")
         return "appointment deleted"
