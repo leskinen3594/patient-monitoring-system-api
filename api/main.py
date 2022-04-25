@@ -10,7 +10,7 @@ from .controllers import (
 from message_broker import connectMQTT, publish
 
 
-origins = ["https://api-pms-dev.herokuapp.com"]
+origins = ["*"]
 
 
 def create_app():
