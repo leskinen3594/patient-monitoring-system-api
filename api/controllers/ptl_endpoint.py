@@ -41,15 +41,15 @@ async def get_all():
     return list(map(PatientList.from_orm, ptls))
 
 
-@router.get("/{doctor_id}", response_model=PatientList, response_model_exclude_none=True)
+@router.get("/{doctor_id}", response_model=List[PatientList], response_model_exclude_none=True)
 async def get_by_id(doctor_id: str):
     try:
-        ptl = await get_one_ptl_service(doctor_id)
+        ptls = await get_one_ptl_service(doctor_id)
     except NotFoundException as error_not_found:
         raise HTTPException(status_code=404, detail=f"{error_not_found}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"{e}")
-    return ptl
+    return ptls
 
 
 @router.put("/{ptl_id}", response_model=CreateUpdateSuccess)
