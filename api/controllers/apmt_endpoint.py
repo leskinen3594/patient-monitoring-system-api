@@ -3,7 +3,7 @@ from typing import List
 
 from ..services.appointment import (
     create_apmt_service, get_all_apmt_service, get_one_apmt_service,
-    update_apmt_service, delete_apmt_service
+    update_apmt_service, delete_apmt_service, get_one_apmt_by_id_service
 ) 
 
 from ..schemas.appointment import (
@@ -46,6 +46,17 @@ async def get_all():
 async def get_by_id(pt_id: str):
     try:
         apmts = await get_one_apmt_service(pt_id)
+    except NotFoundException as error_not_found:
+        raise HTTPException(status_code=404, detail=f"{error_not_found}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"{e}")
+    return apmts
+
+
+@router.get("/{apmt_id}", response_model=List[Appointment], response_model_exclude_none=True)
+async def get_by_apmt_id(apmt_id: str):
+    try:
+        apmts = await get_one_apmt_by_id_service(apmt_id)
     except NotFoundException as error_not_found:
         raise HTTPException(status_code=404, detail=f"{error_not_found}")
     except Exception as e:

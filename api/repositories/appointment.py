@@ -66,6 +66,21 @@ class AppointmentRepository(AppointmentRepositoryAbstract):
         return self.apmt
 
 
+    async def select_by_apmt_id(self, id: str) -> Appointment:
+        try:
+            self.apmt = self.db.query(_models.Appointment)\
+                                .filter(
+                                    and_(_models.Appointment.apmt_id == id,
+                                    datetime.now() < _models.Appointment.apmt_datettime))\
+                                .all()
+
+            if self.apmt is None:
+                raise
+        except:
+            raise NotFoundException(f"apmt_id: '{id}' not found.")
+        return self.apmt
+
+
     async def update(self, apmt: Appointment, apmt_update: CreateUpdate) -> str:
         try:
             apmt.pt_id = apmt_update['pt_id']

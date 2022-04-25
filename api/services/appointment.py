@@ -8,6 +8,7 @@ from domain.usecase import (
     get_one_apmt as __usecase_get_one,
     update_apmt_info as __usecase_update,
     delete_apmt as __usecase_delete,
+    get_one_apmt_by_id as __usecase_get_one_id
 )
 
 
@@ -21,6 +22,10 @@ async def get_all_apmt_service():
 
 async def get_one_apmt_service(pt_id: str):
     return await __usecase_get_one(pt_id)
+
+
+async def get_one_apmt_by_id_service(apmt_id: str):
+    return await __usecase_get_one_id(apmt_id)
 
 
 async def update_apmt_service(apmt_id: str, apmt_request: List[str]) -> str:
