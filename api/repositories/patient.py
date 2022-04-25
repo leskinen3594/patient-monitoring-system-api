@@ -30,16 +30,16 @@ class PatientRepository(PatientRepositoryAbstract):
             self.patient = _models.Patient(**patient)
             self.db.add(self.patient)
             self.db.commit()
-        except:
-            raise DuplicateKeyException(f"'patient_code' or 'identity_number' already exist.")
+        except Exception as e:
+            raise DuplicateKeyException(f"'patient_code' or 'identity_number' already exist. {e}")
         return (patient['pt_code'], "patient created")
 
 
     async def select_all(self) -> Patient:
         try:
             self.patients = self.db.query(_models.Patient).all()
-        except:
-            raise NotFoundException(f"patient empty.")
+        except Exception as e:
+            raise NotFoundException(f"patient empty. {e}")
         return self.patients
 
 
@@ -49,8 +49,8 @@ class PatientRepository(PatientRepositoryAbstract):
 
             if self.patient is None:
                 raise
-        except:
-            raise NotFoundException(f"patient_id: '{id}' not found.")
+        except Exception as e:
+            raise NotFoundException(f"patient_id: '{id}' not found. {e}")
         return self.patient
 
 
@@ -70,6 +70,6 @@ class PatientRepository(PatientRepositoryAbstract):
             patient.updated_at = patient_update['updated_at']
 
             self.db.commit()
-        except:
-            raise RequireKeyException(f"pt_code and identity_number require.")
+        except Exception as e:
+            raise RequireKeyException(f"pt_code and identity_number require. {e}")
         return (patient.pt_id, "patient updated")

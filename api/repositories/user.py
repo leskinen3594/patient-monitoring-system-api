@@ -34,16 +34,16 @@ class UserRepository(UserRepositoryAbstract):
             self.user = _models.User(**user)
             self.db.add(self.user)
             self.db.commit()
-        except:
-            raise DuplicateKeyException(f"this email already exist.")
+        except Exception as e:
+            raise DuplicateKeyException(f"this email already exist. {e}")
         return "user created"
 
 
     async def select_all(self) -> User:
         try:
             self.users = self.db.query(_models.User).all()
-        except:
-            raise NotFoundException(f"user empty.")
+        except Exception as e:
+            raise NotFoundException(f"user empty. {e}")
         return self.users
 
 
@@ -53,8 +53,8 @@ class UserRepository(UserRepositoryAbstract):
 
             if self.user is None:
                 raise
-        except:
-            raise NotFoundException(f"user_id: '{id}' not found.")
+        except Exception as e:
+            raise NotFoundException(f"user_id: '{id}' not found. {e}")
         return self.user
 
 
@@ -69,8 +69,8 @@ class UserRepository(UserRepositoryAbstract):
             user.updated_at = user_update['updated_at']
 
             self.db.commit()
-        except:
-            raise DuplicateKeyException(f"this email already exist.")
+        except Exception as e:
+            raise DuplicateKeyException(f"this email already exist. {e}")
         return "user updated"
 
 
@@ -78,8 +78,8 @@ class UserRepository(UserRepositoryAbstract):
         try:
             self.db.delete(user)
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot delete user_id: '{user.user_id}'.")
+        except Exception as e:
+            raise UnknowException(f"cannot delete user_id: '{user.user_id}'. {e}")
         return "user deleted"
 
 
@@ -119,8 +119,8 @@ class UserRepository(UserRepositoryAbstract):
 
             if self.user_info is None:
                 raise
-        except:
-            raise NotFoundException(f"email or password invalid.")
+        except Exception as e:
+            raise NotFoundException(f"email or password invalid. {e}")
         return self.user_info
 
 
@@ -132,8 +132,8 @@ class UserRepository(UserRepositoryAbstract):
 
             if self.doctor_info is None:
                 raise
-        except:
-            raise NotFoundException(f"doctor not found.")
+        except Exception as e:
+            raise NotFoundException(f"doctor not found. {e}")
         return self.doctor_info
 
 
@@ -142,6 +142,6 @@ class UserRepository(UserRepositoryAbstract):
             self.patient_info = self.db.query(_models.Patient)\
                                         .filter(_models.Patient.user_id == userId)\
                                         .first()
-        except:
-            raise NotFoundException(f"patient not found.")
+        except Exception as e:
+            raise NotFoundException(f"patient not found. {e}")
         return self.patient_info

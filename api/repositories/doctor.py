@@ -30,16 +30,16 @@ class DoctorRepository(DoctorRepositoryAbstract):
             self.doctor = _models.Doctor(**doctor)
             self.db.add(self.doctor)
             self.db.commit()
-        except:
-            raise DuplicateKeyException(f"doctor_code: '{doctor['doctor_code']}' already exist.")
+        except Exception as e:
+            raise DuplicateKeyException(f"doctor_code: '{doctor['doctor_code']}' already exist. {e}")
         return (doctor['doctor_code'], "doctor created")
 
 
     async def select_all(self) -> Doctor:
         try:
             self.doctors = self.db.query(_models.Doctor).all()
-        except:
-            raise NotFoundException(f"doctor empty.")
+        except Exception as e:
+            raise NotFoundException(f"doctor empty. {e}")
         return self.doctors
 
 
@@ -49,8 +49,8 @@ class DoctorRepository(DoctorRepositoryAbstract):
 
             if self.doctor is None:
                 raise
-        except:
-            raise NotFoundException(f"doctor_id: '{id}' not found.")
+        except Exception as e:
+            raise NotFoundException(f"doctor_id: '{id}' not found. {e}")
         return self.doctor
 
 
@@ -60,6 +60,6 @@ class DoctorRepository(DoctorRepositoryAbstract):
             doctor.updated_at = doctor_update['updated_at']
 
             self.db.commit()
-        except:
-            raise RequireKeyException(f"doctor_code require.")
+        except Exception as e:
+            raise RequireKeyException(f"doctor_code require. {e}")
         return (doctor.doctor_id, "doctor updated")

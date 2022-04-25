@@ -30,16 +30,16 @@ class LogRepository(LogRepositoryAbstract):
             self.log = _models.Log(**log)
             self.db.add(self.log)
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot create estimate log.")
+        except Exception as e:
+            raise UnknowException(f"cannot create estimate log. {e}")
         return "estimate log created"
 
 
     async def select_all(self) -> EstimateLog:
         try:
             self.logs = self.db.query(_models.Log).all()
-        except:
-            raise NotFoundException(f"log empty.")
+        except Exception as e:
+            raise NotFoundException(f"log empty. {e}")
         return self.logs
 
 
@@ -49,8 +49,8 @@ class LogRepository(LogRepositoryAbstract):
 
             if self.log is None:
                 raise
-        except:
-            raise NotFoundException(f"log_id: '{id}' not found.")
+        except Exception as e:
+            raise NotFoundException(f"log_id: '{id}' not found. {e}")
         return self.log
 
 
@@ -63,8 +63,8 @@ class LogRepository(LogRepositoryAbstract):
             log.updated_at = log_update['updated_at']
 
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot update log_id: '{log.log_id}'.")
+        except Exception as e:
+            raise UnknowException(f"cannot update log_id: '{log.log_id}'. {e}")
         return "estimate log updated"
 
 
@@ -72,6 +72,6 @@ class LogRepository(LogRepositoryAbstract):
         try:
             self.db.delete(log)
             self.db.commit()
-        except:
-            raise UnknowException(f"cannot delete log_id: '{log.log_id}'.")
+        except Exception as e:
+            raise UnknowException(f"cannot delete log_id: '{log.log_id}'. {e}")
         return "estimate log deleted"
