@@ -40,5 +40,6 @@ app.add_middleware(
 
 # Run with cli
 # uvicorn api.main:app --reload --host 0.0.0.0 --port 5000
-# web: uvicorn api.main:app --host=0.0.0.0 --port=${PORT:-5000}
+
+# Procfile
 # web: uvicorn api.main:app --host=0.0.0.0 --port=${PORT:-5000} --limit-concurrency=3000 --timeout-keep-alive=30 --log-level=debug
